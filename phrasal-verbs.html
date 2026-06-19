@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Phrasal Verbs &middot; Lexicon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3efe6; --ink:#21261f; --ink-soft:#5a6151;
+  --rule:#d8d1c2; --card:#fbf9f3; --amber:#c2611f; --amber-soft:#f2e2d2;
+  --sage:#7d8a6e; --shadow:rgba(33,38,31,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--paper);color:var(--ink);
+  font-family:"Inter",system-ui,sans-serif;line-height:1.5;
+  -webkit-font-smoothing:antialiased;padding:0 0 5rem}
+.wrap{max-width:860px;margin:0 auto;padding:0 1.25rem}
+
+header{padding:3.2rem 0 1.6rem;border-bottom:2px solid var(--ink)}
+.eyebrow{font-family:"JetBrains Mono",monospace;font-size:.72rem;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--amber);margin:0 0 .5rem}
+h1{font-family:"Fraunces",serif;font-weight:900;font-size:clamp(2.6rem,8vw,4.4rem);
+  line-height:.92;margin:0;letter-spacing:-.02em}
+h1 em{font-style:normal;color:var(--amber)}
+.tag{margin:.9rem 0 0;color:var(--ink-soft);max-width:46ch;font-size:1.02rem}
+
+.controls{position:sticky;top:0;z-index:5;background:var(--paper);
+  padding:1rem 0 .8rem;border-bottom:1px solid var(--rule)}
+.searchrow{display:flex;gap:.6rem;align-items:center}
+.search{flex:1;display:flex;align-items:center;gap:.55rem;background:var(--card);
+  border:1.5px solid var(--rule);border-radius:2px;padding:.6rem .8rem}
+.search:focus-within{border-color:var(--ink)}
+.search input{border:0;background:transparent;outline:0;width:100%;
+  font-family:"Inter",sans-serif;font-size:1rem;color:var(--ink)}
+.search svg{flex:none;stroke:var(--ink-soft)}
+.modebtn{font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.08em;
+  text-transform:uppercase;background:var(--ink);color:var(--paper);border:0;
+  padding:.7rem 1rem;border-radius:2px;cursor:pointer;white-space:nowrap}
+.modebtn:hover{background:var(--amber)}
+.count{font-family:"JetBrains Mono",monospace;font-size:.74rem;color:var(--ink-soft);
+  margin:.7rem 0 0;letter-spacing:.05em}
+
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.75rem 0 0}
+.chip{font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.03em;
+  background:transparent;border:1.5px solid var(--rule);color:var(--ink-soft);
+  padding:.28rem .6rem;border-radius:100px;cursor:pointer}
+.chip:hover{border-color:var(--amber);color:var(--amber)}
+.chip.on{background:var(--amber);border-color:var(--amber);color:#fff}
+.chip .n{opacity:.6;margin-left:.3em}
+
+/* browse list */
+.list{margin:1.4rem 0 0}
+.entry{display:grid;grid-template-columns:1fr;gap:.15rem;
+  padding:1.05rem 0;border-bottom:1px solid var(--rule)}
+.hw{font-family:"Fraunces",serif;font-weight:600;font-size:1.5rem;letter-spacing:-.01em}
+.hw .stem{color:var(--ink)}
+.hw .part{color:var(--amber);font-weight:900}
+.def{color:var(--ink-soft);font-size:1.02rem}
+.def .alt{color:var(--rule);margin:0 .35em}
+mark{background:var(--amber-soft);color:var(--ink);padding:0 .12em;border-radius:2px}
+.empty{padding:3rem 0;text-align:center;color:var(--ink-soft)}
+.empty b{display:block;font-family:"Fraunces",serif;font-size:1.3rem;color:var(--ink);margin-bottom:.3rem}
+
+/* study mode */
+.study{margin:1.6rem 0 0;display:none;flex-direction:column;align-items:center}
+.study.on{display:flex}
+.cardstage{width:100%;max-width:520px;perspective:1400px}
+.flip{position:relative;width:100%;aspect-ratio:3/2;cursor:pointer;
+  transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,.1,.2,1)}
+.flip.flipped{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;background:var(--card);
+  border:1.5px solid var(--ink);border-radius:4px;box-shadow:0 18px 40px -22px var(--shadow);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:1.5rem}
+.face.back{transform:rotateY(180deg);background:var(--ink);border-color:var(--ink)}
+.face .lab{font-family:"JetBrains Mono",monospace;font-size:.68rem;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--amber);position:absolute;top:1rem;left:1rem}
+.face.back .lab{color:var(--sage)}
+.cardhw{font-family:"Fraunces",serif;font-weight:600;font-size:2.4rem;line-height:1.05}
+.cardhw .part{color:var(--amber);font-weight:900}
+.carddef{color:#e9e6dc;font-size:1.25rem;font-family:"Fraunces",serif;line-height:1.35}
+.hint{font-family:"JetBrains Mono",monospace;font-size:.66rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-soft);position:absolute;bottom:1rem}
+.face.back .hint{color:var(--sage)}
+.nav{display:flex;align-items:center;gap:1rem;margin:1.6rem 0 .4rem}
+.nav button{font-family:"JetBrains Mono",monospace;font-size:.8rem;background:transparent;
+  border:1.5px solid var(--ink);color:var(--ink);padding:.6rem 1.1rem;border-radius:2px;cursor:pointer}
+.nav button:hover{background:var(--ink);color:var(--paper)}
+.nav .pos{font-family:"JetBrains Mono",monospace;font-size:.8rem;color:var(--ink-soft);min-width:5.5rem;text-align:center}
+.shuffle{font-family:"JetBrains Mono",monospace;font-size:.74rem;letter-spacing:.06em;
+  text-transform:uppercase;background:transparent;border:0;color:var(--amber);cursor:pointer;
+  padding:.4rem;border-bottom:1.5px solid var(--amber)}
+@media(max-width:520px){.cardhw{font-size:2rem}.carddef{font-size:1.1rem}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Working Lexicon</p>
+    <h1>Phrasal<br>Verbs<em>.</em></h1>
+    <p class="tag">A verb plus a small word &mdash; <em style="font-style:normal;color:var(--amber);font-weight:600">up, out, off</em> &mdash; and the meaning turns. The particle is highlighted in every entry; that little word is the one doing the work.</p>
+  </header>
+
+  <div class="controls">
+    <div class="searchrow">
+      <label class="search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+        <input id="q" type="search" placeholder="Search a verb or a meaning&hellip;" autocomplete="off">
+      </label>
+      <button class="modebtn" id="mode">Study &rarr;</button>
+    </div>
+    <div class="chips" id="chips"></div>
+    <p class="count" id="count"></p>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="study" id="studyView">
+    <div class="cardstage">
+      <div class="flip" id="flip">
+        <div class="face front"><span class="lab">Verb</span><div class="cardhw" id="cHw"></div><span class="hint">Tap to reveal</span></div>
+        <div class="face back"><span class="lab">Meaning</span><div class="carddef" id="cDef"></div><span class="hint">Tap to flip back</span></div>
+      </div>
+    </div>
+    <div class="nav">
+      <button id="prev">&larr; Prev</button>
+      <span class="pos" id="pos"></span>
+      <button id="next">Next &rarr;</button>
+    </div>
+    <button class="shuffle" id="shuffle">Shuffle deck</button>
+  </div>
+</div>
+
+<script>
+const DATA = [{"verb": "ask out", "def": "to invite someone on a romantic date", "src": "Built-in"}, {"verb": "back down", "def": "to withdraw from a position or argument", "src": "Built-in"}, {"verb": "back up", "def": "to support someone; to make a copy of data", "src": "Built-in"}, {"verb": "blow up", "def": "to explode; to become very angry", "src": "Built-in"}, {"verb": "break away", "def": "to escape or leave a group suddenly", "src": "Built-in"}, {"verb": "break down", "def": "to stop functioning; to lose emotional control", "src": "Built-in"}, {"verb": "break into", "def": "to enter a place by force; to start doing suddenly", "src": "Built-in"}, {"verb": "break off", "def": "to end something suddenly", "src": "Built-in"}, {"verb": "break out", "def": "to escape; to begin suddenly", "src": "Built-in"}, {"verb": "break up", "def": "to end a relationship; to separate into pieces", "src": "Built-in"}, {"verb": "bring about", "def": "to cause something to happen", "src": "Built-in"}, {"verb": "bring back", "def": "to return something; to remind of the past", "src": "Built-in"}, {"verb": "bring forward", "def": "to move an event to an earlier time", "src": "Built-in"}, {"verb": "bring up", "def": "to mention a topic; to raise a child", "src": "Built-in"}, {"verb": "burn out", "def": "to exhaust oneself through overwork", "src": "Built-in"}, {"verb": "call back", "def": "to return a phone call", "src": "Built-in"}, {"verb": "call off", "def": "to cancel something that was planned", "src": "Built-in"}, {"verb": "call up", "def": "to telephone someone", "src": "Built-in"}, {"verb": "calm down", "def": "to become less agitated or upset", "src": "Built-in"}, {"verb": "carry on", "def": "to continue doing something", "src": "Built-in"}, {"verb": "catch on", "def": "to understand; to become popular", "src": "Built-in"}, {"verb": "catch up", "def": "to reach the same level as others", "src": "Built-in"}, {"verb": "check in", "def": "to register at a hotel or airport", "src": "Built-in"}, {"verb": "check out", "def": "to leave a hotel; to examine something closely", "src": "Built-in"}, {"verb": "clean up", "def": "to tidy a place", "src": "Built-in"}, {"verb": "clear out", "def": "to empty a space of its contents", "src": "Built-in"}, {"verb": "close down", "def": "to cease operation permanently", "src": "Built-in"}, {"verb": "come across", "def": "to find or meet someone by chance", "src": "Built-in"}, {"verb": "come back", "def": "to return to a place", "src": "Built-in"}, {"verb": "come down", "def": "to decrease; to travel south", "src": "Built-in"}, {"verb": "come in", "def": "to enter a place; to arrive", "src": "Built-in"}, {"verb": "come out", "def": "to be published; to reveal one's identity", "src": "Built-in"}, {"verb": "come up with", "def": "to think of an idea or plan", "src": "Built-in"}, {"verb": "count on", "def": "to rely on someone or something", "src": "Built-in"}, {"verb": "cross out", "def": "to draw a line through something to cancel it", "src": "Built-in"}, {"verb": "cut back", "def": "to reduce spending or consumption", "src": "Built-in"}, {"verb": "cut down", "def": "to reduce the amount of something; to fell a tree", "src": "Built-in"}, {"verb": "cut off", "def": "to stop abruptly; to interrupt someone", "src": "Built-in"}, {"verb": "cut out", "def": "to stop doing something; to remove by cutting", "src": "Built-in"}, {"verb": "deal with", "def": "to handle or take action about something", "src": "Built-in"}, {"verb": "die out", "def": "to become extinct or gradually disappear", "src": "Built-in"}, {"verb": "do away with", "def": "to abolish or eliminate something", "src": "Built-in"}, {"verb": "do up", "def": "to fasten clothing; to renovate a building", "src": "Built-in"}, {"verb": "draw up", "def": "to prepare a formal document", "src": "Built-in"}, {"verb": "drop out", "def": "to leave school or a course before finishing", "src": "Built-in"}, {"verb": "eat out", "def": "to have a meal in a restaurant", "src": "Built-in"}, {"verb": "end up", "def": "to reach a final state or place unexpectedly", "src": "Built-in"}, {"verb": "face up to", "def": "to accept and deal with something difficult", "src": "Built-in"}, {"verb": "fall apart", "def": "to break into pieces; to fail completely", "src": "Built-in"}, {"verb": "fall behind", "def": "to fail to keep pace with others", "src": "Built-in"}, {"verb": "fall out", "def": "to quarrel with someone; to have a disagreement", "src": "Built-in"}, {"verb": "feel up to", "def": "to feel capable of doing something", "src": "Built-in"}, {"verb": "figure out", "def": "to understand or find a solution to something", "src": "Built-in"}, {"verb": "fill in", "def": "to complete a form; to substitute for someone", "src": "Built-in"}, {"verb": "find out", "def": "to discover or learn new information", "src": "Built-in"}, {"verb": "get across", "def": "to communicate an idea successfully", "src": "Built-in"}, {"verb": "get ahead", "def": "to make progress or succeed in life", "src": "Built-in"}, {"verb": "get along", "def": "to have a good relationship with someone", "src": "Built-in"}, {"verb": "get away", "def": "to escape; to go on a short holiday", "src": "Built-in"}, {"verb": "get back", "def": "to return to a place; to recover something", "src": "Built-in"}, {"verb": "get by", "def": "to manage with limited money or resources", "src": "Built-in"}, {"verb": "get down", "def": "to depress someone; to descend from something", "src": "Built-in"}, {"verb": "get in", "def": "to enter a vehicle or building; to arrive", "src": "Built-in"}, {"verb": "get off", "def": "to leave a vehicle; to avoid punishment", "src": "Built-in"}, {"verb": "get on", "def": "to board a vehicle; to make progress; to have a good relationship", "src": "Built-in"}, {"verb": "get out", "def": "to leave a place; to escape", "src": "Built-in"}, {"verb": "get over", "def": "to recover from an illness or disappointment", "src": "Built-in"}, {"verb": "get through", "def": "to finish a task; to make contact with someone", "src": "Built-in"}, {"verb": "get up", "def": "to rise from bed; to stand up", "src": "Built-in"}, {"verb": "give away", "def": "to give something for free; to reveal a secret", "src": "Built-in"}, {"verb": "give back", "def": "to return something to its owner", "src": "Built-in"}, {"verb": "give in", "def": "to stop resisting; to surrender", "src": "Built-in"}, {"verb": "give out", "def": "to distribute to a group; to run out of energy", "src": "Built-in"}, {"verb": "give up", "def": "to stop trying; to quit something", "src": "Built-in"}, {"verb": "go ahead", "def": "to proceed with a plan or action", "src": "Built-in"}, {"verb": "go back", "def": "to return to a place or previous topic", "src": "Built-in"}, {"verb": "go down", "def": "to decrease; to be remembered in history", "src": "Built-in"}, {"verb": "go off", "def": "to explode; to ring an alarm; to go bad", "src": "Built-in"}, {"verb": "go on", "def": "to continue; to happen or take place", "src": "Built-in"}, {"verb": "go out", "def": "to leave the house to socialise; to be extinguished", "src": "Built-in"}, {"verb": "go over", "def": "to review or examine something carefully", "src": "Built-in"}, {"verb": "go through", "def": "to experience difficulty; to examine thoroughly", "src": "Built-in"}, {"verb": "go up", "def": "to increase in amount; to be constructed", "src": "Built-in"}, {"verb": "grow on", "def": "to become more liked or appreciated over time", "src": "Built-in"}, {"verb": "grow up", "def": "to develop from a child into an adult", "src": "Built-in"}, {"verb": "hang on", "def": "to wait a moment; to hold something tightly", "src": "Built-in"}, {"verb": "hand in", "def": "to submit work or an assignment", "src": "Built-in"}, {"verb": "hang up", "def": "to end a phone call; to hang clothing on a hook", "src": "Built-in"}, {"verb": "have on", "def": "to be wearing something; to have something planned", "src": "Built-in"}, {"verb": "head off", "def": "to intercept; to prevent something from happening", "src": "Built-in"}, {"verb": "hold back", "def": "to restrain oneself or someone else; to hesitate", "src": "Built-in"}, {"verb": "hold on", "def": "to wait; to grip something tightly", "src": "Built-in"}, {"verb": "hold up", "def": "to delay; to rob; to remain strong under pressure", "src": "Built-in"}, {"verb": "hurry up", "def": "to move or act more quickly", "src": "Built-in"}, {"verb": "keep away", "def": "to stay or make someone stay at a distance", "src": "Built-in"}, {"verb": "keep on", "def": "to continue doing something persistently", "src": "Built-in"}, {"verb": "keep up", "def": "to maintain the same speed or standard", "src": "Built-in"}, {"verb": "knock out", "def": "to make someone unconscious by a blow", "src": "Built-in"}, {"verb": "leave out", "def": "to omit or not include something", "src": "Built-in"}, {"verb": "let down", "def": "to disappoint someone who trusted you", "src": "Built-in"}, {"verb": "let in", "def": "to allow someone to enter a place", "src": "Built-in"}, {"verb": "let out", "def": "to release someone; to make a garment larger", "src": "Built-in"}, {"verb": "light up", "def": "to illuminate a place; to brighten with happiness", "src": "Built-in"}, {"verb": "line up", "def": "to arrange in a row; to queue", "src": "Built-in"}, {"verb": "live up to", "def": "to meet expectations or standards set", "src": "Built-in"}, {"verb": "look after", "def": "to take care of a person or thing", "src": "Built-in"}, {"verb": "look around", "def": "to explore or examine an area", "src": "Built-in"}, {"verb": "look at", "def": "to direct one's gaze at something", "src": "Built-in"}, {"verb": "look forward to", "def": "to anticipate something with pleasure", "src": "Built-in"}, {"verb": "look into", "def": "to investigate or research something", "src": "Built-in"}, {"verb": "look out", "def": "to be careful; to watch for danger", "src": "Built-in"}, {"verb": "look up", "def": "to search for information; to improve", "src": "Built-in"}, {"verb": "make out", "def": "to manage; to understand; to see with difficulty", "src": "Built-in"}, {"verb": "make over", "def": "to completely change the appearance of something", "src": "Built-in"}, {"verb": "make up", "def": "to invent a story; to reconcile after a quarrel", "src": "Built-in"}, {"verb": "meet up", "def": "to meet someone by prior arrangement", "src": "Built-in"}, {"verb": "mix up", "def": "to confuse two things; to blend together", "src": "Built-in"}, {"verb": "move on", "def": "to stop dwelling on the past and progress forward", "src": "Built-in"}, {"verb": "open up", "def": "to become less reserved; to start operating", "src": "Built-in"}, {"verb": "pass out", "def": "to faint; to hand something to several people", "src": "Built-in"}, {"verb": "pay back", "def": "to repay money or a favour owed", "src": "Built-in"}, {"verb": "pay off", "def": "to repay a debt fully; to yield good results", "src": "Built-in"}, {"verb": "phase out", "def": "to gradually discontinue something", "src": "Built-in"}, {"verb": "pick up", "def": "to collect someone; to learn a skill informally", "src": "Built-in"}, {"verb": "play down", "def": "to make something seem less important than it is", "src": "Built-in"}, {"verb": "point out", "def": "to draw attention to a fact or problem", "src": "Built-in"}, {"verb": "pull off", "def": "to succeed in doing something difficult", "src": "Built-in"}, {"verb": "put away", "def": "to store something in its proper place", "src": "Built-in"}, {"verb": "put back", "def": "to return something to its original place", "src": "Built-in"}, {"verb": "put down", "def": "to place something on a surface; to criticise", "src": "Built-in"}, {"verb": "put off", "def": "to postpone; to cause dislike or loss of interest", "src": "Built-in"}, {"verb": "put on", "def": "to dress in clothing; to pretend; to gain weight", "src": "Built-in"}, {"verb": "put out", "def": "to extinguish a fire; to inconvenience someone", "src": "Built-in"}, {"verb": "put up with", "def": "to tolerate something or someone unpleasant", "src": "Built-in"}, {"verb": "read out", "def": "to read something aloud to others", "src": "Built-in"}, {"verb": "run away", "def": "to flee from a place or person", "src": "Built-in"}, {"verb": "run into", "def": "to meet someone unexpectedly", "src": "Built-in"}, {"verb": "run out of", "def": "to use all of something so none remains", "src": "Built-in"}, {"verb": "save up", "def": "to accumulate money gradually over time", "src": "Built-in"}, {"verb": "set off", "def": "to begin a journey; to cause something to start", "src": "Built-in"}, {"verb": "set up", "def": "to arrange or establish something", "src": "Built-in"}, {"verb": "show off", "def": "to boast about or display something proudly", "src": "Built-in"}, {"verb": "shut down", "def": "to stop a machine or operation", "src": "Built-in"}, {"verb": "sort out", "def": "to resolve a problem or organise things neatly", "src": "Built-in"}, {"verb": "speed up", "def": "to go or do something faster", "src": "Built-in"}, {"verb": "stand out", "def": "to be clearly noticeable or better than others", "src": "Built-in"}, {"verb": "sum up", "def": "to summarise the main points of something", "src": "Built-in"}, {"verb": "take off", "def": "to remove clothing; to become suddenly successful", "src": "Built-in"}, {"verb": "turn down", "def": "to reject an offer; to lower the volume", "src": "Built-in"}, {"verb": "wear out", "def": "to exhaust someone; to make unusable through use", "src": "Built-in"}, {"verb": "work out", "def": "to exercise; to calculate; to result successfully", "src": "Built-in"}];
+const PARTS = {};
+DATA.forEach(d=>{const p=d.verb.split(" ").slice(-1)[0];(PARTS[p]=PARTS[p]||0);PARTS[p]++;});
+const topParts = Object.entries(PARTS).sort((a,b)=>b[1]-a[1]).slice(0,9).map(x=>x[0]);
+
+let activePart=null, query="", studyMode=false, deck=[], idx=0;
+
+const esc=s=>s.replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function splitVerb(v){const parts=v.split(" ");return {stem:parts.slice(0,-1).join(" "),part:parts.slice(-1)[0]};}
+function hl(text,q){if(!q)return esc(text);const i=text.toLowerCase().indexOf(q.toLowerCase());
+  if(i<0)return esc(text);return esc(text.slice(0,i))+"<mark>"+esc(text.slice(i,i+q.length))+"</mark>"+esc(text.slice(i+q.length));}
+
+function filtered(){
+  return DATA.filter(d=>{
+    if(activePart && d.verb.split(" ").slice(-1)[0]!==activePart) return false;
+    if(query){const q=query.toLowerCase();
+      if(!d.verb.toLowerCase().includes(q) && !d.def.toLowerCase().includes(q)) return false;}
+    return true;
+  });
+}
+
+function renderChips(){
+  const c=document.getElementById("chips");
+  c.innerHTML="";
+  const all=document.createElement("button");
+  all.className="chip"+(activePart?"":" on");all.innerHTML="all <span class=n>"+DATA.length+"</span>";
+  all.onclick=()=>{activePart=null;render();};c.appendChild(all);
+  topParts.forEach(p=>{const b=document.createElement("button");
+    b.className="chip"+(activePart===p?" on":"");b.innerHTML=p+" <span class=n>"+PARTS[p]+"</span>";
+    b.onclick=()=>{activePart=activePart===p?null:p;render();};c.appendChild(b);});
+}
+
+function renderList(){
+  const rows=filtered();const L=document.getElementById("list");
+  document.getElementById("count").textContent=rows.length+" of "+DATA.length+" entries"+(activePart?" \u00b7 \u201c"+activePart+"\u201d":"");
+  if(!rows.length){L.innerHTML='<div class="empty"><b>No matches</b>Try a different word, or clear the filter.</div>';return;}
+  L.innerHTML=rows.map(d=>{const{stem,part}=splitVerb(d.verb);
+    const defHtml=d.def.split(";").map(s=>hl(s.trim(),query)).join('<span class="alt">/</span>');
+    return '<div class="entry"><div class="hw"><span class="stem">'+hl(stem,query)+
+      ' </span><span class="part">'+hl(part,query)+'</span></div><div class="def">'+defHtml+'</div></div>';}).join("");
+}
+
+/* study */
+function buildDeck(){deck=filtered().slice();idx=0;showCard();}
+function showCard(){
+  if(!deck.length){document.getElementById("cHw").textContent="\u2014";document.getElementById("cDef").textContent="No cards";
+    document.getElementById("pos").textContent="0 / 0";return;}
+  if(idx<0)idx=deck.length-1; if(idx>=deck.length)idx=0;
+  const d=deck[idx];const{stem,part}=splitVerb(d.verb);
+  document.getElementById("cHw").innerHTML='<span class="stem">'+esc(stem)+' </span><span class="part">'+esc(part)+'</span>';
+  document.getElementById("cDef").textContent=d.def;
+  document.getElementById("pos").textContent=(idx+1)+" / "+deck.length;
+  document.getElementById("flip").classList.remove("flipped");
+}
+document.getElementById("flip").onclick=()=>document.getElementById("flip").classList.toggle("flipped");
+document.getElementById("next").onclick=()=>{idx++;showCard();};
+document.getElementById("prev").onclick=()=>{idx--;showCard();};
+document.getElementById("shuffle").onclick=()=>{for(let i=deck.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[deck[i],deck[j]]=[deck[j],deck[i]];}idx=0;showCard();};
+
+function render(){renderChips();if(studyMode){buildDeck();}else{renderList();}}
+
+document.getElementById("q").addEventListener("input",e=>{query=e.target.value;render();});
+document.getElementById("mode").onclick=()=>{
+  studyMode=!studyMode;
+  document.getElementById("list").style.display=studyMode?"none":"block";
+  document.getElementById("studyView").classList.toggle("on",studyMode);
+  document.getElementById("mode").innerHTML=studyMode?"&larr; Browse":"Study &rarr;";
+  render();
+};
+document.addEventListener("keydown",e=>{
+  if(!studyMode)return;
+  if(e.key==="ArrowRight"){idx++;showCard();}
+  if(e.key==="ArrowLeft"){idx--;showCard();}
+  if(e.key===" "){e.preventDefault();document.getElementById("flip").classList.toggle("flipped");}
+});
+
+render();
+</script>
+</body>
+</html>
