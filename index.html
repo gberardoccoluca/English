@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phrasal Verbs — C1 Toolkit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#E7E9EC;
+    --card:#F5F6F8;
+    --ink:#16212B;
+    --ink-soft:#5A6573;
+    --ink-faint:#8A929C;
+    --amber:#A65F0B;
+    --amber-wash:#F3E2C2;
+    --teal:#1C6B62;
+    --line:#D3D8DD;
+    --line-soft:#E1E5E9;
+  }
+  *{box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:"Space Grotesk",system-ui,sans-serif;line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;display:flex;flex-direction:column;
+  }
+  .wrap{max-width:720px;margin:0 auto;padding:64px 22px 40px;width:100%;flex:1;}
+
+  /* ---- hero ---- */
+  .eyebrow{
+    font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:600;margin:0 0 10px;
+  }
+  h1{
+    margin:0;font-weight:700;letter-spacing:-.025em;line-height:1.02;
+    font-size:clamp(34px,8vw,54px);
+  }
+  h1 .accent{color:var(--teal);}
+  .lede{
+    margin:16px 0 0;font-family:"Newsreader",Georgia,serif;
+    font-size:clamp(18px,3.4vw,21px);color:var(--ink-soft);max-width:50ch;line-height:1.5;
+  }
+  .lede .p{color:var(--amber);font-style:italic;}
+  .lede .v{color:var(--teal);}
+
+  .meta{display:flex;gap:22px;margin:26px 0 0;flex-wrap:wrap;}
+  .meta .stat{display:flex;flex-direction:column;gap:1px;}
+  .meta .num{font-size:24px;font-weight:600;letter-spacing:-.01em;line-height:1;}
+  .meta .lab{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-faint);font-weight:600;}
+
+  /* ---- tools ---- */
+  .tools{margin-top:46px;display:flex;flex-direction:column;gap:14px;}
+  .tool{
+    display:flex;align-items:center;gap:18px;text-decoration:none;color:inherit;
+    background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:20px 22px;transition:transform .14s ease,border-color .14s ease,box-shadow .14s ease;
+  }
+  .tool:hover{transform:translateY(-2px);border-color:var(--ink-faint);
+    box-shadow:0 6px 22px -14px rgba(22,33,43,.4);}
+  .tool .idx{
+    font-family:"Newsreader",serif;font-size:15px;color:var(--ink-faint);
+    width:24px;flex:0 0 auto;font-style:italic;
+  }
+  .tool .body{flex:1;min-width:0;}
+  .tool .name{font-size:18px;font-weight:600;letter-spacing:-.01em;margin:0;}
+  .tool .desc{font-size:13.5px;color:var(--ink-soft);margin:4px 0 0;max-width:48ch;}
+  .tool .arrow{flex:0 0 auto;color:var(--ink-faint);transition:transform .14s ease,color .14s ease;}
+  .tool:hover .arrow{color:var(--teal);transform:translateX(3px);}
+
+  /* per-tool accent edge */
+  .tool.study{border-left:3px solid var(--teal);}
+  .tool.quiz{border-left:3px solid var(--amber);}
+  .tool.context{border-left:3px solid var(--ink);}
+
+  footer{
+    border-top:1px solid var(--line-soft);
+    padding:22px;text-align:center;
+    font-size:12px;color:var(--ink-faint);letter-spacing:.03em;
+  }
+  footer .part{color:var(--amber);font-weight:600;}
+  footer .ctx{color:var(--teal);font-weight:600;}
+
+  :focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:14px;}
+
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">CEFR · Advanced English</p>
+    <h1>Phrasal verbs,<br>worked <span class="accent">three ways</span></h1>
+    <p class="lede">One set of 151 verbs — learn the <span class="p">particles</span>, test yourself, and meet each <span class="v">verb at work</span> in a natural C1 sentence.</p>
+
+    <div class="meta">
+      <div class="stat"><span class="num">151</span><span class="lab">Verbs</span></div>
+      <div class="stat"><span class="num">3</span><span class="lab">Tools</span></div>
+      <div class="stat"><span class="num">C1</span><span class="lab">Level</span></div>
+    </div>
+
+    <nav class="tools">
+      <a class="tool study" href="phrasal-verbs.html">
+        <span class="idx">i</span>
+        <span class="body">
+          <p class="name">Lexicon</p>
+          <p class="desc">Browse and search the full set, filter by particle, and drill with flip-card study mode.</p>
+        </span>
+        <svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="tool quiz" href="phrasal-verbs-quiz.html">
+        <span class="idx">ii</span>
+        <span class="body">
+          <p class="name">Quiz</p>
+          <p class="desc">Multiple-choice testing in both directions — verb to meaning and back — with instant feedback and a review of what you missed.</p>
+        </span>
+        <svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+
+      <a class="tool context" href="phrasal-verbs-c1.html">
+        <span class="idx">iii</span>
+        <span class="body">
+          <p class="name">In context</p>
+          <p class="desc">Every verb in a natural C1 example sentence, with the verb marked at work. Hide meanings to self-test.</p>
+        </span>
+        <svg class="arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </nav>
+  </div>
+
+  <footer>
+    Amber marks the <span class="part">particle</span> · teal marks the verb <span class="ctx">in context</span>
+  </footer>
+</body>
+</html>
